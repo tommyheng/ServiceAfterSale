@@ -1,0 +1,94 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RoleInsert</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="~/lib/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="~/css/font.css">
+    <script src="~/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/layui/layui.js" charset="utf-8"></script>
+
+</head>
+<body>
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-body">
+
+                        <form class="layui-form" action="">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">角色名称</label>
+                                <div class="layui-input-block">
+                                    <input type="text" id="name" name="name" placeholder="请输入角色名称" required lay-verify="required" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button type="button" class="layui-btn" lay-submit lay-filter="form">立即提交</button>
+                                    <button type="reset" class="layui-btn layui-btn-danger" style="width:100px;">重置</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <script>
+                            //初始化layui
+                            layui.use(['layer', 'form'], function () {
+                                var form = layui.form;
+
+                                //监听提交
+                                form.on('submit(form)', function (data) {
+
+
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '/Security/RoleInsert',
+                                        data: data.field,
+                                        datatype: 'json',
+                                        success: function (data) {
+                                            //console.info(data);
+                                            if (data.type == 200) {
+                                                layer.alert(data.content, { icon: 6 }, function () {
+                                                    closeself();
+                                                });
+
+                                            } else {
+                                                layer.alert("修改失败，或者权限不够", { icon: 5 });
+                                            }
+
+                                        }
+                                    });
+
+                                    return false;
+                                });
+                            });
+
+
+                            //关闭自己
+                            var closeself = function () {
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
+
+                            }
+
+
+
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

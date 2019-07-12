@@ -1,0 +1,6 @@
+﻿-- 区域表
+CREATE TABLE [dbo].[Area]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Name] NVARCHAR(50) NOT NULL
+)
