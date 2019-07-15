@@ -4,7 +4,7 @@ CREATE TABLE [dbo].[Goods]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Name] NVARCHAR(50) NOT NULL, 
-	[GId] INT NOT NULL, 
+	[GtId] INT NOT NULL, 
     [Type] INT NOT NULL
 
 )
